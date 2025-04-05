@@ -87,7 +87,7 @@ export function resetNumberGame() {
 
 export function updateBackButton() {
   const backBtn = document.getElementById('backBtn');
-  if (backBtn) backBtn.textContent = texts.backBtn[localStorage.getItem('lang') || 'fr'];
+  if (backBtn) backBtn.textContent = texts.backBtn[currentLang];
 }
 
 // =========================

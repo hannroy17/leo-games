@@ -15,7 +15,7 @@ export const texts = {
   chiffresLabel: { fr: 'Chiffres', de: 'Zahlen' },
   numberQuestionBase: { fr: 'Trouve le chiffre ', de: 'Finde die Zahl ' },
   numberSuccessTitle: { fr: '🎉 Bravo !', de: '🎉 Gut gemacht!' },
-  restartBtn: { fr: '🔁 Recommencer', de: '🔁 Neu starten' },
+  restartNumberBtn: { fr: '🔁 Recommencer', de: '🔁 Neu starten' },
   nextGameBtn: { fr: '🎮 Jeu suivant', de: '🎮 Nächstes Spiel' },
   numberGameLabel: { fr: 'Trouve le chiffre', de: 'Finde die Zahl' }
 };
@@ -31,6 +31,7 @@ export function updateLanguage() {
     if (el) el.textContent = texts[key][currentLang];
   }
 
+  // Spécifique à numberGame
   const numberQuestion = document.getElementById("numberQuestion");
   if (
     numberQuestion &&
@@ -39,4 +40,8 @@ export function updateLanguage() {
   ) {
     numberQuestion.textContent = texts.numberQuestionBase[currentLang] + window.currentNumber;
   }
+
+  // Mise à jour manuelle du bouton retour
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.textContent = texts.backBtn[currentLang];
 }
