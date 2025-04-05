@@ -3,7 +3,13 @@
 // =========================
 import { setLanguage, updateLanguage, texts } from './language.js';
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  const onHome = !document.getElementById("home").classList.contains("hidden");
+  const backBtn = document.getElementById("backBtn");
+  if (onHome && backBtn) {
+    backBtn.classList.add("hidden");
+  }
+});
 
 // =========================
 // 🧭 NAVIGATION
@@ -22,31 +28,44 @@ export function goToCategory(cat) {
 }
 
 export function goBack() {
-  const screens = {
-    mainGame: 'gameSelection',
-    speedGame: 'gameSelection',
-    numberGame: 'gameSelectionChiffres'
-  };
+  const mainGame = document.getElementById('mainGame');
+  const speedGame = document.getElementById('speedGame');
+  const gameSelection = document.getElementById('gameSelection');
+  const gameSelectionChiffres = document.getElementById("gameSelectionChiffres");
+  const numberGame = document.getElementById("numberGame");
 
-  for (let screen in screens) {
-    if (!document.getElementById(screen).classList.contains('hidden')) {
-      document.getElementById(screen).classList.add('hidden');
-      document.getElementById(screens[screen]).classList.remove('hidden');
-      updateBackButton();
-      return;
-    }
+  if (!mainGame.classList.contains('hidden')) {
+    mainGame.classList.add('hidden');
+    gameSelection.classList.remove('hidden');
+  } else if (!speedGame.classList.contains('hidden')) {
+    speedGame.classList.add('hidden');
+    gameSelection.classList.remove('hidden');
+  } else if (!gameSelection.classList.contains('hidden')) {
+    gameSelection.classList.add('hidden');
+    document.getElementById('home').classList.remove('hidden');
+  } else if (!gameSelectionChiffres.classList.contains("hidden")) {
+    gameSelectionChiffres.classList.add('hidden');
+    document.getElementById('home').classList.remove('hidden');
+  } else if (!numberGame.classList.contains("hidden")) {
+    numberGame.classList.add('hidden');
+    gameSelectionChiffres.classList.remove('hidden');
   }
 
-  hideAllScreens();
-  document.getElementById('home').classList.remove('hidden');
-  updateBackButton();
+  // 👉 cacher le bouton retour si on est sur la home
+  if (!document.getElementById("home").classList.contains("hidden")) {
+    document.getElementById("backBtn").classList.add("hidden");
+  } else {
+    updateBackButton(); // sinon on met à jour
+  }
 }
 
 export function goHome() {
   hideAllScreens();
   document.getElementById('home').classList.remove('hidden');
-  document.getElementById('backBtn').classList.add('hidden');
-  resetNumberGame();
+
+  // Cacher le bouton retour
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.classList.add("hidden");
 }
 
 // =========================
