@@ -6,7 +6,7 @@ git add .
 echo "✍️ Saisis un message de commit :"
 read message
 
-git commit -m "$message"
+git commit -m "🚀 Mise à jour du site - $(date)"
 
 echo "🚀 Envoi sur GitHub..."
 git push origin main
