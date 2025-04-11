@@ -6,6 +6,9 @@ const wrongSound = new Audio('assets/sounds/wrong.mp3');
 import { animals } from './animals-data.js';
 import { texts, currentLang } from './language.js';
 import { updateBackButton, hideAllScreens } from './main.js';
+import { incrementScore } from './score.js';
+import { checkBadge } from './badges.js';
+import { showToast } from './toast.js';
 
 let currentLetter = 'A';
 
@@ -62,11 +65,29 @@ export function showQuestion() {
       const isCorrect = animal[currentLang].initiale === currentLetter;
       img.classList.add(isCorrect ? 'correct' : 'wrong');
       label.textContent = `${animal[currentLang].nom}`;
+
       if (isCorrect) {
-        correctSound.play();  // 🔊 son bonne réponse
+        correctSound.play();
+
+        // 1. Incrémenter le score
+        const score = incrementScore('animal-letter');
+
+        // 2. Vérifier si un badge est débloqué
+        const badge = checkBadge('animal-letter', score);
+
+        // 3. Afficher un toast si badge obtenu
+        if (badge) {
+          showToast({
+            title: currentLang === 'fr' ? 'Nouveau badge !' : 'Neues Abzeichen!',
+            description: badge[currentLang].description,
+            icon: badge.icon,
+            lang: currentLang
+          });
+        }
+
         setTimeout(nextRound, 1000);
       } else {
-        wrongSound.play(); // 🔊 son mauvaise réponse
+        wrongSound.play();
       }
     };
 

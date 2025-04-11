@@ -1,4 +1,4 @@
-const CACHE_NAME = 'leo-games-cache-v4';
+const CACHE_NAME = 'leo-games-cache-v5';
 const urlsToCache = [
   'index.html',
 'style.css',
@@ -10,8 +10,14 @@ const urlsToCache = [
 'js/event-handlers.js',
 'js/animal-speedGame.js',
 'js/animal-letterGame.js',
+'js/score.js',
+'js/badges.js',
+'js/progress.js',
+'js/toast.js',
 'assets/fonts/fredoka-v16-latin-regular.woff2',
 'assets/icons/coupe.avif',
+'assets/icons/badge-letter-10.avif',
+'assets/icons/badge-speed-10.avif',
 'assets/flags/fr.svg',
 'assets/flags/de.svg',
 'assets/categories-pics/animaux-categorie-carte-crop.jpg',
@@ -78,7 +84,8 @@ const urlsToCache = [
 'assets/animals-pics/ver.jpg',
 'assets/animals-pics/zebre.jpg',
 'assets/sounds/correct.mp3',
-'assets/sounds/wrong.mp3'
+'assets/sounds/wrong.mp3',
+'assets/sounds/badges.mp3'
 ];
 
 self.addEventListener('install', event => {

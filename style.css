@@ -223,3 +223,101 @@ h1, h2, h3 {
 #trophyImage {
   animation: bounceTrophy 1s ease;
 }
+
+/* 🧁 Conteneur principal du toast */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background-color: #fff;
+  border: 2px solid #ffe0b2;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  padding: 16px;
+  padding-bottom: 100px;
+  width: 90%;
+  max-width: 360px;
+  z-index: 2000;
+  animation: slideUp 0.5s forwards;
+  font-family: 'Fredoka', sans-serif;
+}
+
+/* 🖼️ Bloc intérieur */
+.toast-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* ← centre tous les textes */
+  padding-bottom: 15px;
+  gap: 0px;
+}
+
+/* 🏅 Icône du badge */
+
+.toast-icon-large {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* 📜 Texte du toast */
+
+
+.toast-texts h4 {
+  margin: 0;
+  font-size: 22px;
+  text-align: center;
+  color: #4b3f72;
+}
+
+.toast-texts p {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+  color: #666;
+}
+
+/* ✖️ Bouton fermer */
+#toast-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+}
+
+
+/* ▶️ CTA */
+.toast-cta {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #ffb347;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toast-cta:hover {
+  background-color: #ff9e1b;
+}
+
+/* ✨ Animation d’apparition */
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}

@@ -5,6 +5,9 @@ const wrongSound = new Audio('assets/sounds/wrong.mp3');
 import { speedAnimals } from './animals-data.js';
 import { texts, currentLang } from './language.js';
 import { updateBackButton, hideAllScreens } from './main.js';
+import { incrementScore } from './score.js';
+import { checkBadge } from './badges.js';
+import { showToast } from './toast.js';
 
 export function startSpeedGame() {
   document.getElementById('gameSelection').classList.add('hidden');
@@ -35,20 +38,37 @@ export function showSpeedQuestion() {
     const img = document.createElement('img');
     img.src = animal.image;
     img.alt = animal[currentLang].nom;
+
+    const label = document.createElement('div');
+    label.className = 'label';
+
     img.onclick = () => {
       const isCorrect = animal.id === fastest.id;
       img.classList.add(isCorrect ? 'correct' : 'wrong');
       label.textContent = `${animal[currentLang].nom} - ${animal.vitesse} km/h`;
+
       if (isCorrect) {
         correctSound.play();  // 🔊 bonne réponse
+
+        // 🎯 Ajout du score
+        const score = incrementScore('animal-speed');
+
+        // 🏅 Vérifie si un badge est débloqué
+        const badge = checkBadge('animal-speed', score);
+        if (badge) {
+          showToast({
+            title: currentLang === 'fr' ? 'Nouveau badge !' : 'Neues Abzeichen!',
+            description: badge[currentLang].description,
+            icon: badge.icon,
+            lang: currentLang
+          });
+        }
+
         setTimeout(showSpeedQuestion, 1000);
       } else {
         wrongSound.play(); // 🔊 mauvaise réponse
       }
     };
-
-    const label = document.createElement('div');
-    label.className = 'label';
 
     wrapper.appendChild(img);
     wrapper.appendChild(label);
