@@ -1,4 +1,4 @@
-const CACHE_NAME = 'leo-games-cache-v3';
+const CACHE_NAME = 'leo-games-cache-v4';
 const urlsToCache = [
   'index.html',
 'style.css',
@@ -76,7 +76,9 @@ const urlsToCache = [
 'assets/animals-pics/tortue.jpg',
 'assets/animals-pics/vache.jpg',
 'assets/animals-pics/ver.jpg',
-'assets/animals-pics/zebre.jpg'
+'assets/animals-pics/zebre.jpg',
+'assets/sounds/correct.mp3',
+'assets/sounds/wrong.mp3'
 ];
 
 self.addEventListener('install', event => {

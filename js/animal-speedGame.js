@@ -1,4 +1,7 @@
 // animal-speedGame.js
+const correctSound = new Audio('assets/sounds/correct.mp3');
+const wrongSound = new Audio('assets/sounds/wrong.mp3');
+
 import { speedAnimals } from './animals-data.js';
 import { texts, currentLang } from './language.js';
 import { updateBackButton, hideAllScreens } from './main.js';
@@ -36,7 +39,12 @@ export function showSpeedQuestion() {
       const isCorrect = animal.id === fastest.id;
       img.classList.add(isCorrect ? 'correct' : 'wrong');
       label.textContent = `${animal[currentLang].nom} - ${animal.vitesse} km/h`;
-      if (isCorrect) setTimeout(showSpeedQuestion, 1000);
+      if (isCorrect) {
+        correctSound.play();  // 🔊 bonne réponse
+        setTimeout(showSpeedQuestion, 1000);
+      } else {
+        wrongSound.play(); // 🔊 mauvaise réponse
+      }
     };
 
     const label = document.createElement('div');

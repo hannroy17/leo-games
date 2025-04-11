@@ -1,5 +1,8 @@
 // animal-letterGame.js (module version)
 
+const correctSound = new Audio('assets/sounds/correct.mp3');
+const wrongSound = new Audio('assets/sounds/wrong.mp3');
+
 import { animals } from './animals-data.js';
 import { texts, currentLang } from './language.js';
 import { updateBackButton, hideAllScreens } from './main.js';
@@ -59,7 +62,12 @@ export function showQuestion() {
       const isCorrect = animal[currentLang].initiale === currentLetter;
       img.classList.add(isCorrect ? 'correct' : 'wrong');
       label.textContent = `${animal[currentLang].nom}`;
-      if (isCorrect) setTimeout(nextRound, 1000);
+      if (isCorrect) {
+        correctSound.play();  // 🔊 son bonne réponse
+        setTimeout(nextRound, 1000);
+      } else {
+        wrongSound.play(); // 🔊 son mauvaise réponse
+      }
     };
 
     wrapper.appendChild(img);

@@ -1,4 +1,7 @@
 // number-findnumbersgame.js
+const correctSound = new Audio('assets/sounds/correct.mp3');
+const wrongSound = new Audio('assets/sounds/wrong.mp3');
+const successFinalSound = new Audio('assets/sounds/success.mp3');
 
 import { texts, currentLang, updateLanguage } from './language.js';
 import { hideAllScreens } from './main.js';
@@ -46,18 +49,27 @@ export function showNumberQuestion() {
 
     btn.onclick = () => {
       if (num === currentNumber) {
+        correctSound.play(); // 🔊 bonne réponse
+    
         btn.classList.add("success");
+    
         setTimeout(() => {
           btn.classList.remove("success");
+    
           currentNumber++;
+    
+          if (currentNumber > 10) {
+            successFinalSound.play(); // 🔊 son final !
+          }
+    
           showNumberQuestion();
         }, 700);
       } else {
+        wrongSound.play(); // 🔊 mauvaise réponse
         btn.style.backgroundColor = "#f44336";
         setTimeout(() => (btn.style.backgroundColor = ""), 600);
       }
     };
-
     container.appendChild(btn);
   });
 }
